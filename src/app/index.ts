@@ -1,11 +1,9 @@
 import Express, { Errback, NextFunction, Request, Response } from "express";
-import ExpressAsyncHandler from "express-async-handler";
-
+import "express-async-errors";
 const App = Express();
 
 App.use(Express.json());
 App.use(Express.urlencoded({ extended: false }));
-App.use(ExpressAsyncHandler);
 
 App.get("/helth", (req: Request, res: Response, next: NextFunction) => {
   try {
