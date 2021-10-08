@@ -1,0 +1,12 @@
+{
+  "name": "pipedrive-bling-integration",
+  "version": "1.0.0",
+  "description": "Integration for pipedrive CRM and Bling",
+  "main": "index.js",
+  "author": "Victor Raton <vfbraton@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "pipedrive": "^12.0.1"
+  }
+}
