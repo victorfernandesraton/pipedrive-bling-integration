@@ -1,7 +1,11 @@
 import { parseDeal } from "../adapters/PipeDriveAdapter";
-import DealEntity from "../entity/Deal";
+import DealEntity, { DealStatusTypeEnum } from "../entity/Deal";
+import AppError from "../errors/AppError";
 import PipeDriveRepository from "../repository/PipeDriveRepository";
 
+export interface FindDealsFilter {
+  status?: DealStatusTypeEnum;
+}
 export default class PipeDriveService {
   constructor(
     readonly PipeDriveRepository: PipeDriveRepository // readonly BlingRepository: BlingRepository, // readonly ScheduleRepository: ScheduleRepositorey
@@ -11,12 +15,12 @@ export default class PipeDriveService {
     try {
       const result = await this.PipeDriveRepository.getDeals(filter);
 
-      if (result?.data) {
-        return Promise.resolve(result.data.map(parseDeal));
+      if (result) {
+        return Promise.resolve(result);
       }
-      return Promise.resolve([]);
+      throw new AppError(404, "not find deals");
     } catch (error) {
-      return Promise.reject(error);
+      throw error;
     }
   }
 

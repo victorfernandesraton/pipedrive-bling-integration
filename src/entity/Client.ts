@@ -4,9 +4,9 @@ export enum ClientTypeEnum {
   PJ = "PJ",
 }
 export enum ClientContactTypeEnum {
-  PHONE,
-  EMAIL,
-  MOBILE,
+  PHONE = "PHONE",
+  EMAIL = "EMAIL",
+  MOBILE = "MOBILE",
 }
 export interface ClientContact {
   type: ClientContactTypeEnum;

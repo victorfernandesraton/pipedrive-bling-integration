@@ -1,4 +1,7 @@
 import axios from "axios";
+import { parseDeal } from "../../adapters/PipeDriveAdapter";
+import DealEntity from "../../entity/Deal";
+import AppError from "../../errors/AppError";
 import PipeDriveRepository, { DealsFilter } from "../PipeDriveRepository";
 
 export const PipeDriveHttpProvider = axios.create({
@@ -9,15 +12,19 @@ export const PipeDriveHttpProvider = axios.create({
 });
 
 export default class PipeDriveHttpRepository implements PipeDriveRepository {
-  async getDeals(data: DealsFilter): Promise<any> {
+  async getDeals(data: DealsFilter): Promise<DealEntity[]> {
     try {
-      const result = await PipeDriveHttpProvider.get("/deals", {
+      const { data: result } = await PipeDriveHttpProvider.get("/deals", {
         params: data,
       });
 
-      return result.data;
+      if (result?.success && result?.data) {
+        return Promise.resolve(result.data.map(parseDeal));
+      } else {
+        throw new AppError(404, "Not find any deal");
+      }
     } catch (error) {
-      Promise.reject(error);
+      throw error;
     }
   }
 }

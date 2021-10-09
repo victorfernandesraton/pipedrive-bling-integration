@@ -1,4 +1,4 @@
-import { JsonHanler, ParseResponse } from "../adapters/ExpressAdapter";
+import { JsonHanler } from "../adapters/ExpressAdapter";
 import ApplicationHttp from "../entity/ApplicationHtp";
 import PipeDriveService from "../service/PipeDrive";
 
@@ -7,9 +7,9 @@ export default class DealController {
     readonly service: PipeDriveService,
     readonly parseRespose: JsonHanler
   ) {}
-  async findDeals({ params, errorParse, response }: ApplicationHttp) {
+  async findDeals({ query, errorParse, response }: ApplicationHttp) {
     try {
-      const result = await this.service.findDeals(params);
+      const result = await this.service.findDeals(query);
 
       this.parseRespose(response)({ data: result, code: 200 });
     } catch (error) {
