@@ -1,6 +1,5 @@
 import axios from "axios";
-import { DealStatusTypeEnum } from "../../entity/Deal";
-import PipeDriveRepository from "../PipeDriveRepository";
+import PipeDriveRepository, { DealsFilter } from "../PipeDriveRepository";
 
 export const PipeDriveHttpProvider = axios.create({
   baseURL: process.env.PIPEDRIVE_API,
@@ -9,16 +8,16 @@ export const PipeDriveHttpProvider = axios.create({
   },
 });
 
-export interface GetDealsParams {
-  status: DealStatusTypeEnum;
-  start: number;
-  limit: number;
-}
-
 export default class PipeDriveHttpRepository implements PipeDriveRepository {
-  getDeals(data: GetDealsParams): Promise<any> {
-    return PipeDriveHttpProvider.get("v1/deals", {
-      params: data,
-    });
+  async getDeals(data: DealsFilter): Promise<any> {
+    try {
+      const result = await PipeDriveHttpProvider.get("/deals", {
+        params: data,
+      });
+
+      return result.data;
+    } catch (error) {
+      Promise.reject(error);
+    }
   }
 }
