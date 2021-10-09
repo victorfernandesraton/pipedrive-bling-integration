@@ -1,3 +1,3 @@
 export default interface PipeDriveRepository {
-  getDeals(): Promise<any>;
+  getDeals(data: any): Promise<any>;
 }
