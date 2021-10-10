@@ -9,8 +9,7 @@ export default class ScheduleService {
 
       return Promise.resolve(schedule);
     } catch (error) {
-      console.log(error);
-      return Promise.reject(error);
+      throw error;
     }
   }
 

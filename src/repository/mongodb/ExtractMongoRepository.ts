@@ -7,7 +7,7 @@ export default class ExtractMongoReposiotry implements ExtractRepository {
   constructor(readonly collection: Collection) {}
   async insertOne(data: Extract): Promise<Extract> {
     try {
-      const result = await this.collection.insertOne(data);
+      await this.collection.insertOne(data);
       return Promise.resolve(data);
     } catch (error) {
       throw error;
