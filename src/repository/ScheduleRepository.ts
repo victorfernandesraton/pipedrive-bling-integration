@@ -1,5 +1,5 @@
 export default interface ScheduleRepositorey {
-  create(data?: any): Promise<any>;
-  update(data?: any): Promise<any>;
-  find(data?: any): Promise<any>;
+  create(): Promise<any>;
+  update(id?: string): Promise<any>;
+  find(id?: string): Promise<any>;
 }

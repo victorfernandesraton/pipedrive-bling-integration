@@ -7,9 +7,7 @@ export interface FindDealsFilter {
   status?: DealStatusTypeEnum;
 }
 export default class PipeDriveService {
-  constructor(
-    readonly PipeDriveRepository: PipeDriveRepository // readonly BlingRepository: BlingRepository, // readonly ScheduleRepository: ScheduleRepositorey
-  ) {}
+  constructor(readonly PipeDriveRepository: PipeDriveRepository) {}
 
   async findDeals(filter?: any): Promise<DealEntity[]> {
     try {
@@ -23,11 +21,4 @@ export default class PipeDriveService {
       throw error;
     }
   }
-
-  // async batchOrder(filter?: any): Promise<any> {
-  //   const data = await this.findDeals(filter);
-  //   const order = { deals: data, schedule: "schedule" };
-  //   await this.ScheduleRepository.create(order);
-  //   // TODO producer do rabbitm
-  // }
 }

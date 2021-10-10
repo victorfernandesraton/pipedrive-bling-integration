@@ -13,4 +13,13 @@ export default class ScheduleService {
       return Promise.reject(error);
     }
   }
+
+  async create(): Promise<any> {
+    try {
+      const schedule = await this.ScheduleRepository.create();
+      return Promise.resolve(schedule);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
