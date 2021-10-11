@@ -13,7 +13,9 @@ export class BtachCotroller {
     readonly blingService: BlingService,
     readonly scheduleService: ScheduleService,
     readonly parseResponse: JsonHanler
-  ) {}
+  ) {
+    this.batchDeals.bind(this);
+  }
 
   async batchDeals({ errorParse, response }: ApplicationHttp) {
     try {
