@@ -11,7 +11,6 @@ describe("BlingAdapter", () => {
         variation: "Caixa",
         situation: ProductSituationEnum.ACTIVE,
       });
-
       test("shoud be a xml header", () => {
         expect(
           result.includes(`<?xml version="1.0" encoding="UTF-8"?>`)

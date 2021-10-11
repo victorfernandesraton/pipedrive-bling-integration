@@ -1,21 +1,12 @@
+import ProductEntity from "../entity/Product";
 import ScheduleRepositorey from "../repository/ScheduleRepository";
 
 export default class ScheduleService {
   constructor(readonly ScheduleRepository: ScheduleRepositorey) {}
 
-  async find(data?: any): Promise<any> {
+  async create(data: ProductEntity): Promise<any> {
     try {
-      const schedule = await this.ScheduleRepository.find(data);
-
-      return Promise.resolve(schedule);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async create(): Promise<any> {
-    try {
-      const schedule = await this.ScheduleRepository.create();
+      const schedule = await this.ScheduleRepository.create(data);
       return Promise.resolve(schedule);
     } catch (error) {
       throw error;

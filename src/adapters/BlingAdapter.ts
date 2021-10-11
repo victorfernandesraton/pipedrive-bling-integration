@@ -1,4 +1,5 @@
 import xml from "xml";
+import { parseStringPromise } from "xml2js";
 import ProductEntity from "../entity/Product";
 export function parseToString(data: ProductEntity) {
   const result = xml(

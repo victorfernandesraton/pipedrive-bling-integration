@@ -1,5 +1,5 @@
+import ProductEntity from "../entity/Product";
+
 export default interface ScheduleRepositorey {
-  create(): Promise<any>;
-  update(id?: string): Promise<any>;
-  find(id?: string): Promise<any>;
+  create(data: ProductEntity): Promise<ProductEntity>;
 }

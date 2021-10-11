@@ -3,7 +3,6 @@ import { parseProductFromDeal } from "../adapters/PipeDriveAdapter";
 import ApplicationHttp from "../entity/ApplicationHtp";
 import { DealStatusTypeEnum } from "../entity/Deal";
 import BlingService from "../service/BlingService";
-import ExtractService from "../service/ExtractService";
 import PipeDriveService from "../service/PipeDrive";
 import ScheduleService from "../service/ScheduleService";
 
@@ -22,18 +21,21 @@ export class BtachCotroller {
         state: DealStatusTypeEnum.WON,
       });
 
-      console.log(data);
-
-      // const schedule = await this.scheduleService.create();
-
       const result = await Promise.all(
         data.map(
           async (item) =>
             await this.blingService.createOrder(parseProductFromDeal(item))
         )
       );
-      console.log(result);
-      this.parseResponse(response)({ data: { message: "created scheduke" } });
+
+      // const store = await Promise.all(
+      //   result.map(async (item) => item.map(await this.scheduleService.create))
+      // );
+
+      this.parseResponse(response)({
+        data: { message: "created scheduke" },
+        code: 200,
+      });
     } catch (error) {
       errorParse(error);
     }
