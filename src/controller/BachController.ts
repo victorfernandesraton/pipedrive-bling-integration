@@ -11,7 +11,7 @@ export class BtachCotroller {
     // readonly extractService: ExtractService,
     readonly pipedDriveService: PipeDriveService,
     readonly blingService: BlingService,
-    // readonly scheduleService: ScheduleService,
+    readonly scheduleService: ScheduleService,
     readonly parseResponse: JsonHanler
   ) {}
 
@@ -28,9 +28,9 @@ export class BtachCotroller {
         )
       );
 
-      // const store = await Promise.all(
-      //   result.map(async (item) => item.map(await this.scheduleService.create))
-      // );
+      const store = await Promise.all(
+        result.map(async (item) => item.map(await this.scheduleService.create))
+      );
 
       this.parseResponse(response)({
         data: { message: "created scheduke" },

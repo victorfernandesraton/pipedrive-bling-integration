@@ -1,31 +1,40 @@
-import Express, { Errback, NextFunction, Request, Response } from "express";
+import Express, {
+  Errback,
+  NextFunction,
+  Request,
+  Response,
+  Router,
+} from "express";
 import "express-async-errors";
-import route from "./routes";
 const App = Express();
 
-App.use(Express.json({ strict: true }));
-App.use(Express.urlencoded({ extended: true }));
-App.use(route);
+export default function start(route: Router): any {
+  App.use(Express.json({ strict: true }));
+  App.use(Express.urlencoded({ extended: true }));
 
-App.get("/helth", (req: Request, res: Response, next: NextFunction) => {
-  try {
-    res.send({
-      data: "OK",
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+  App.use(route);
 
-App.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(404).json({ message: "Page Not Found" });
-});
-
-App.use((err: Errback, req: Request, res: Response, next: NextFunction) => {
-  return res.status(err?.code ?? 500).json({
-    message: err?.message,
-    stackTrace: process.env.NODE_ENV === "development" ? err?.stack : undefined,
+  App.get("/helth", (req: Request, res: Response, next: NextFunction) => {
+    try {
+      res.send({
+        data: "OK",
+      });
+    } catch (error) {
+      next(error);
+    }
   });
-});
 
-export default App;
+  App.use((req: Request, res: Response, next: NextFunction) => {
+    res.status(404).json({ message: "Page Not Found" });
+  });
+
+  App.use((err: Errback, req: Request, res: Response, next: NextFunction) => {
+    return res.status(err?.code ?? 500).json({
+      message: err?.message,
+      stackTrace:
+        process.env.NODE_ENV === "development" ? err?.stack : undefined,
+    });
+  });
+
+  return App;
+}

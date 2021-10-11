@@ -4,33 +4,29 @@ import {
   jsonResponse,
   extractionHttpData,
 } from "../../adapters/ExpressAdapter";
-import DealController from "../../controller/DealController";
-import PipeDriveHttpRepository, {
-  PipeDriveHttpProvider,
-} from "../../repository/http/PipeDriveHttpRepository";
 import { BtachCotroller } from "../../controller/BachController";
-
-import BlingHttpRepository, {
-  BlingHttpProvider,
-} from "../../repository/http/BlingHttpRepository";
+import ScheduleService from "../../service/ScheduleService";
 import BlingService from "../../service/BlingService";
 
-const pipeDriveService = new PipeDriveService(
-  new PipeDriveHttpRepository(PipeDriveHttpProvider)
-);
-
-const blingService = new BlingService(
-  new BlingHttpRepository(BlingHttpProvider)
-);
-const bachController = new BtachCotroller(
-  pipeDriveService,
+export interface BatchRoutesParams {
+  scheduleService: ScheduleService;
+  blingService: BlingService;
+  pipedDriveService: PipeDriveService;
+}
+export default function ({
+  scheduleService,
   blingService,
-  jsonResponse
-);
-const route = Router();
-
-route.post("/", (...args) =>
-  bachController.batchDeals(extractionHttpData(...args))
-);
-
-export default route;
+  pipedDriveService,
+}: BatchRoutesParams): Router {
+  const route = Router();
+  const bachController = new BtachCotroller(
+    pipedDriveService,
+    blingService,
+    scheduleService,
+    jsonResponse
+  );
+  route.post("/", (...args) =>
+    bachController.batchDeals(extractionHttpData(...args))
+  );
+  return route;
+}
