@@ -8,15 +8,29 @@ import DealController from "../../controller/DealController";
 import PipeDriveHttpRepository, {
   PipeDriveHttpProvider,
 } from "../../repository/http/PipeDriveHttpRepository";
+import { BtachCotroller } from "../../controller/BachController";
+
+import BlingHttpRepository, {
+  BlingHttpProvider,
+} from "../../repository/http/BlingHttpRepository";
+import BlingService from "../../service/BlingService";
 
 const pipeDriveService = new PipeDriveService(
   new PipeDriveHttpRepository(PipeDriveHttpProvider)
 );
-const dealController = new DealController(pipeDriveService, jsonResponse);
+
+const blingService = new BlingService(
+  new BlingHttpRepository(BlingHttpProvider)
+);
+const bachController = new BtachCotroller(
+  pipeDriveService,
+  blingService,
+  jsonResponse
+);
 const route = Router();
 
-route.get("/", (...args) =>
-  dealController.findDeals(extractionHttpData(...args))
+route.post("/", (...args) =>
+  bachController.batchDeals(extractionHttpData(...args))
 );
 
 export default route;

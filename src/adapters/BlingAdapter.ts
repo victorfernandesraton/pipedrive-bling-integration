@@ -4,7 +4,7 @@ export function parseToString(data: ProductEntity) {
   const result = xml(
     {
       produto: [
-        { codigo: data.id },
+        { codigo: data.code },
         {
           descricao: data.description,
         },
@@ -21,4 +21,18 @@ export function parseToString(data: ProductEntity) {
   );
 
   return result;
+}
+
+export function parseProduct(data: any): ProductEntity {
+  const { id, codigo, descricao, situacao, preco, volumes, name } = data;
+
+  return {
+    description: descricao,
+    name: name,
+    id,
+    code: codigo,
+    price: preco,
+    volume: volumes,
+    situation: situacao,
+  };
 }

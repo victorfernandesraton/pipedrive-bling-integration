@@ -1,0 +1,49 @@
+{
+  "retorno": {
+    "produtos": [
+      {
+        "produto": {
+          "id": 14911560076,
+          "codigo": "12347",
+          "descricao": "A product",
+          "tipo": "P",
+          "situacao": "Ativo",
+          "unidade": "",
+          "preco": "",
+          "precoCusto": "",
+          "descricaoComplementar": "",
+          "cest": "",
+          "class_fiscal": "",
+          "idGrupoProduto": null,
+          "linkExterno": "",
+          "observacoes": "",
+          "descricaoFornecedor": "",
+          "idFabricante": "",
+          "codigoFabricante": "",
+          "pesoLiq": "",
+          "pesoBruto": "",
+          "gtin": "",
+          "gtinEmbalagem": "",
+          "alturaProduto": "",
+          "larguraProduto": "",
+          "profundidadeProduto": "",
+          "unidadeMedida": null,
+          "itensPorCaixa": null,
+          "volumes": 1,
+          "estoqueMinimo": "",
+          "estoqueMaximo": "",
+          "localizacao": "",
+          "crossdocking": "",
+          "marca": "",
+          "garantia": "",
+          "condicao": null,
+          "freteGratis": "N",
+          "producao": "",
+          "dataValidade": "",
+          "spedTipoItem": "",
+          "idCategoria": ""
+        }
+      }
+    ]
+  }
+}

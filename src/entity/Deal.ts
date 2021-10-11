@@ -16,6 +16,7 @@ export interface UserEntity {
 }
 
 export default interface DealEntity {
+  name: string;
   status: DealStatusTypeEnum;
   user: UserEntity;
   id: string;

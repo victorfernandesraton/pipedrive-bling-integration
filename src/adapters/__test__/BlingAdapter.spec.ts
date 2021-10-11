@@ -1,13 +1,15 @@
+import { ProductSituationEnum } from "../../entity/Product";
 import { parseToString } from "../BlingAdapter";
 
 describe("BlingAdapter", () => {
   describe("parseToString", () => {
     describe("Parse valid product", () => {
       const result = parseToString({
-        id: "1234",
+        code: "1234",
         description: "A product",
         name: "Pexie",
         variation: "Caixa",
+        situation: ProductSituationEnum.ACTIVE,
       });
 
       test("shoud be a xml header", () => {

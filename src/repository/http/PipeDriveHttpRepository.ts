@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { parseDeal } from "../../adapters/PipeDriveAdapter";
 import DealEntity from "../../entity/Deal";
 import AppError from "../../errors/AppError";
@@ -12,9 +12,10 @@ export const PipeDriveHttpProvider = axios.create({
 });
 
 export default class PipeDriveHttpRepository implements PipeDriveRepository {
+  constructor(readonly pipeDriveProvider: AxiosInstance) {}
   async getDeals(data: DealsFilter): Promise<DealEntity[]> {
     try {
-      const { data: result } = await PipeDriveHttpProvider.get("/deals", {
+      const { data: result } = await this.pipeDriveProvider.get("/deals", {
         params: data,
       });
 

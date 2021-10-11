@@ -1,9 +1,11 @@
 import { ClientContactTypeEnum } from "../entity/Client";
 import DealEntity from "../entity/Deal";
+import ProductEntity, { ProductSituationEnum } from "../entity/Product";
 
 export function parseDeal(data: any): DealEntity {
   const {
     active,
+    title,
     currency,
     value,
     deleted,
@@ -18,6 +20,7 @@ export function parseDeal(data: any): DealEntity {
   } = data;
 
   return {
+    name: title,
     active,
     currency,
     value,
@@ -48,5 +51,16 @@ export function parseDeal(data: any): DealEntity {
         },
       ],
     },
+  };
+}
+
+export function parseProductFromDeal(data: DealEntity): ProductEntity {
+  return {
+    name: data.name,
+    description: `${data.name} - ${data.org.name} - ${data.user.name}`,
+    situation: ProductSituationEnum.ACTIVE,
+    code: data.id,
+    price: data.value,
+    volume: 1,
   };
 }
